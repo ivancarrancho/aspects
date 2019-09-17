@@ -1,4 +1,4 @@
-#!/Users/macbook-ivan/Documents/daniel_1/myvenv/bin/python3
+#!/Users/macbook-ivan/Documents/user_history/myvenv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
