@@ -27,7 +27,7 @@ class Project(models.Model):
     team = models.ForeignKey(
         Team,
         verbose_name='Equipo',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         help_text='Equipo al que pertenece el proyecto'
     )
 
@@ -68,7 +68,7 @@ class UserHistory(models.Model):
 
     project = models.ForeignKey(
         Project,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         verbose_name='Proyecto',
         help_text='Proyecto al que pertenece la historia de usuario'
     )
