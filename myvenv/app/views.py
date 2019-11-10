@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView
 from django.views.generic.edit import FormView
 
 
@@ -54,10 +53,10 @@ class TeamCreateFormView(FormView):
 
 
 class TeamUpdateView(FormView, DetailView):
+    object = models.Team
     template_name = 'team_create.html'
     form_class = TeamForm
     success_url = '/app/team_list/'
-    object = models.Team
 
     def get_object(self, queryset=None):
         return get_object_or_404(models.Team, id=self.kwargs['pk'])

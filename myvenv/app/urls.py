@@ -1,9 +1,8 @@
 from django.urls import path
-
 from . import views
 
-app_name = 'app'
 
+app_name = 'app'
 urlpatterns = [
     path(
         'team_list/',
@@ -37,9 +36,4 @@ urlpatterns = [
         views.TeamUpdateView.as_view(),
         name='team_update',
     ),
-    # path(
-    #     'created/',
-    #     views.TeamCreateFormView.as_view(template_name='created.html'),
-    #     name='created',
-    # ),
 ]
