@@ -51,16 +51,21 @@ class ProjectForm(forms.Form):
     manager_name = forms.CharField(label='Nombre del gerente')
     manager_code = forms.CharField(label='Código del gerente')
     planning_start_date = forms.DateField(
-        label='Fecha planeada de inicio (dd/mm/yy)'
+        widget=forms.TextInput(attrs={'type': 'date', 'class': 'datepicker'}),
+        label='Fecha planeada de inicio'
     )
     planning_end_date = forms.DateField(
-        label='Fecha planeada de finalización (dd/mm/yy)'
+        widget=forms.TextInput(attrs={'type': 'date', 'class': 'datepicker'}),
+        label='Fecha planeada de finalización'
     )
+    planning_end_date.widget.attrs['class'] = 'datepicker'
     real_start_date = forms.DateField(
-        label='Fecha real de inicio (dd/mm/yy)'
+        widget=forms.TextInput(attrs={'type': 'date', 'class': 'datepicker'}),
+        label='Fecha real de inicio'
     )
     real_end_date = forms.DateField(
-        label='Fecha real de finalización (dd/mm/yy)'
+        widget=forms.TextInput(attrs={'type': 'date', 'class': 'datepicker'}),
+        label='Fecha real de finalización'
     )
 
     def create_project(self):
@@ -128,7 +133,10 @@ class UserForm(forms.Form):
     username = forms.CharField(label='Nombre')
     charge = forms.CharField(label='Cargo')
     salary = forms.CharField(label='Salario')
-    income_date = forms.DateField(label='Fecha de ingreso')
+    income_date = forms.DateField(
+        widget=forms.TextInput(attrs={'type': 'date', 'class': 'datepicker'}),
+        label='Fecha de ingreso'
+    )
     email = forms.EmailField(label='Email address')
     is_active = forms.BooleanField(label='Activo?')
 
@@ -155,7 +163,7 @@ class UserForm(forms.Form):
         username = cleaned_data.get('Nombre')
         charge = cleaned_data.get('Cargo')
         salary = cleaned_data.get('Salario')
-        income_date = cleaned_data.get('Fecha de ingreso. (dd/mm/yy)')
+        income_date = cleaned_data.get('Fecha de ingreso.')
         email = cleaned_data.get('Email address')
         is_active = cleaned_data.get('Estado')
 
