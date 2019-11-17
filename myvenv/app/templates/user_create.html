@@ -29,9 +29,9 @@
 <body id="page-top">
 <header class="masthead d-flex">
     <div class="container text-center my-auto">
-      <h1 class="mb-1">Equipos</h1>
+      <h1 class="mb-1">Crear / Editar</h1>
       <h3 class="mb-5">
-        <em>Puede crear sus equipos</em>
+        <em>Puede crear un empleado o editar el empleado {{ object.username }}</em>
       </h3>
       <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Ver cómo</a>
     </div>
@@ -39,44 +39,31 @@
 </header>
 
   <!-- About -->
-  <section >
-    <br>
-    <br>
-    <br>
-    <div class="container text-center">
-      <h2 class="mx-auto mb-5">Crear Equipo</h2>
-      <a class="btn btn-primary btn-xl" href="/app/team_create/">Nuevo</a>
-    </div>
-    <br>
-    <br>
-    <br>
-  </section>
-
   <section class="content-section bg-light" id="about">
     <div class="container">
       <div class="row">
         <div class="col-lg-10 mx-auto">
-          <h2>Listado de equipos!</h2>
-
-            {% for team in object_list %}
-            <h3 class="team-item__header-title">
-                <a href="/app/team/{{ team.id }}/"> {{ team.id }} - Nombre: {{ team.name }}</a>
-                - <a href="/app/team-delete/{{ team.id }}/" class="btn btn-danger">Eliminar</a>
-                - <a href="/app/team_update/{{ team.id }}/" class="btn btn-primary">Editar</a>
-            </h3>
-                <h5>Usuarios:</h5>
-                <p class="lead mb-5">
-                    {% for user in team.user.all %}
-                        {{ user }} <br>
-                    {% endfor %}
-                </p>
-            {% empty %}
-                <p class="lead mb-5">No hay resultados</p>
-            {% endfor %}
+          <h2>Detalle</h2>
+            <form method="post">{% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-primary " value="Enviar">
+                </div>
+            </form>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Callout -->
+  <!-- <section class="callout">
+    <div class="container text-center">
+      <h2 class="mx-auto mb-5">Welcome to
+        <em>your</em>
+        next website!</h2>
+      <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/template-overviews/stylish-portfolio/">Download Now!</a>
+    </div>
+  </section> -->
 
   <!-- Portfolio -->
 

@@ -26,68 +26,49 @@
    {% include "menu.html" %}
 {% endblock %}
 
+
+
 <body id="page-top">
 <header class="masthead d-flex">
     <div class="container text-center my-auto">
-      <h1 class="mb-1">Equipos</h1>
+      <h1 class="mb-1">{{ object.name }}</h1>
       <h3 class="mb-5">
-        <em>Puede crear sus equipos</em>
+        <em>Puede ver el detalle de proyecto {{ object.name }}</em>
       </h3>
       <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Ver cómo</a>
     </div>
     <div class="overlay"></div>
 </header>
-
-  <!-- About -->
   <section >
     <br>
     <br>
     <br>
     <div class="container text-center">
-      <h2 class="mx-auto mb-5">Crear Equipo</h2>
-      <a class="btn btn-primary btn-xl" href="/app/team_create/">Nuevo</a>
+      <h2 class="mx-auto mb-5">Crear proyecto</h2>
+      <a class="btn btn-primary btn-xl" href="/app/project_create/">Nuevo</a>
     </div>
     <br>
     <br>
     <br>
   </section>
-
+  <!-- About -->
   <section class="content-section bg-light" id="about">
     <div class="container">
       <div class="row">
         <div class="col-lg-10 mx-auto">
-          <h2>Listado de equipos!</h2>
-
-            {% for team in object_list %}
-            <h3 class="team-item__header-title">
-                <a href="/app/team/{{ team.id }}/"> {{ team.id }} - Nombre: {{ team.name }}</a>
-                - <a href="/app/team-delete/{{ team.id }}/" class="btn btn-danger">Eliminar</a>
-                - <a href="/app/team_update/{{ team.id }}/" class="btn btn-primary">Editar</a>
-            </h3>
-                <h5>Usuarios:</h5>
-                <p class="lead mb-5">
-                    {% for user in team.user.all %}
-                        {{ user }} <br>
-                    {% endfor %}
-                </p>
-            {% empty %}
-                <p class="lead mb-5">No hay resultados</p>
-            {% endfor %}
+          <h2>Detalle</h2>
+            <h5>Nombre: </h5>{{ object.name }}
+            <h5>Pertenece al equipo: </h5> {{ object.team }}
+            <h5>Nombre del gerente: </h5> {{ object.manager_name }}
+            <h5>Código del gerente: </h5> {{ object.manager_code }}
+            <h5>Fecha planeada de inicio: </h5> {{ object.planning_start_date }}
+            <h5>Fecha planeada de finalización: </h5> {{ object.planning_end_date }}
+            <h5>Fecha real de inicio: </h5> {{ object.real_start_date }}
+            <h5>Fecha real de finalización: </h5> {{ object.real_end_date }}
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Portfolio -->
-
-  <!-- Call to Action -->
-  <!-- <section class="content-section bg-primary text-white">
-    <div class="container text-center">
-      <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-      <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-      <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
-    </div>
-  </section> -->
 
   <!-- Footer -->
   <footer class="footer text-center">

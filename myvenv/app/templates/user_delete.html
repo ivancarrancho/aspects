@@ -29,65 +29,13 @@
 <body id="page-top">
 <header class="masthead d-flex">
     <div class="container text-center my-auto">
-      <h1 class="mb-1">Equipos</h1>
-      <h3 class="mb-5">
-        <em>Puede crear sus equipos</em>
-      </h3>
-      <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Ver cómo</a>
+      <h1 class="mb-5">
+        <em>Empleado borrado</em>
+      </h1>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="/app/user_list/">Volver</a>
     </div>
     <div class="overlay"></div>
 </header>
-
-  <!-- About -->
-  <section >
-    <br>
-    <br>
-    <br>
-    <div class="container text-center">
-      <h2 class="mx-auto mb-5">Crear Equipo</h2>
-      <a class="btn btn-primary btn-xl" href="/app/team_create/">Nuevo</a>
-    </div>
-    <br>
-    <br>
-    <br>
-  </section>
-
-  <section class="content-section bg-light" id="about">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-10 mx-auto">
-          <h2>Listado de equipos!</h2>
-
-            {% for team in object_list %}
-            <h3 class="team-item__header-title">
-                <a href="/app/team/{{ team.id }}/"> {{ team.id }} - Nombre: {{ team.name }}</a>
-                - <a href="/app/team-delete/{{ team.id }}/" class="btn btn-danger">Eliminar</a>
-                - <a href="/app/team_update/{{ team.id }}/" class="btn btn-primary">Editar</a>
-            </h3>
-                <h5>Usuarios:</h5>
-                <p class="lead mb-5">
-                    {% for user in team.user.all %}
-                        {{ user }} <br>
-                    {% endfor %}
-                </p>
-            {% empty %}
-                <p class="lead mb-5">No hay resultados</p>
-            {% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio -->
-
-  <!-- Call to Action -->
-  <!-- <section class="content-section bg-primary text-white">
-    <div class="container text-center">
-      <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-      <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-      <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
-    </div>
-  </section> -->
 
   <!-- Footer -->
   <footer class="footer text-center">

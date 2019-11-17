@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Historias de usuario</title>
+  <title>CRUD Uniminuto</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,28 +22,10 @@
 
 </head>
   <!-- Navigation -->
-  <a class="menu-toggle rounded" href="#">
-    <i class="fas fa-bars"></i>
-  </a>
-  <nav id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a class="js-scroll-trigger" href="#page-top">Llévame arriba!</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="/">Home</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="/app/team_list/">Equipos</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="/app/project_list/">Proyectos</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="/app/history_list/">Historias de usuario</a>
-      </li>
-    </ul>
-  </nav>
+
+{% block foo %}
+   {% include "menu.html" %}
+{% endblock %}
 
 <body id="page-top">
 
@@ -103,7 +85,7 @@
           </a>
         </div>
         <div class="col-lg-6">
-          <a class="portfolio-item" href="#">
+          <a class="portfolio-item" href="/app/project_list/">
             <span class="caption">
               <span class="caption-content">
                 <h2>Proyectos</h2>
@@ -114,7 +96,7 @@
           </a>
         </div>
         <div class="col-lg-6">
-          <a class="portfolio-item" href="#">
+          <a class="portfolio-item" href="/app/user_history_list/">
             <span class="caption">
               <span class="caption-content">
                 <h2>Historias de usuario</h2>
@@ -125,11 +107,11 @@
           </a>
         </div>
         <div class="col-lg-6">
-          <a class="portfolio-item" href="#">
+          <a class="portfolio-item" href="/app/user_list/">
             <span class="caption">
               <span class="caption-content">
-                <h2>Usuarios</h2>
-                <p class="mb-0">Crear editar o borrar Usuarios</p>
+                <h2>Empleados</h2>
+                <p class="mb-0">Crear editar o borrar Empleados</p>
               </span>
             </span>
             <img class="img-fluid" src="/static/img/portfolio-4.jpg" alt="">

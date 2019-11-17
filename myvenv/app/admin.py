@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Team
 from .models import Project
 from .models import UserHistory
-from django.contrib.auth.models import User
+from .models import User
 
 
 @admin.register(Team)
@@ -22,6 +22,10 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
+        'planning_start_date',
+        'planning_end_date',
+        'real_start_date',
+        'real_end_date',
     )
 
     search_fields = ('name', 'id')
@@ -47,15 +51,14 @@ class UserHistoryAdmin(admin.ModelAdmin):
     get_teams.short_description = 'Equipos'
 
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email', 'get_groups', 'username', 'is_active')
-    list_filter = ('is_staff', 'is_superuser')
-
-    def get_groups(self, obj):
-        return list(obj.groups.values_list('name', flat=True))
-
-    get_groups.short_description = 'Grupos de usuario'
-
-
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+    list_display = [
+        'id',
+        'username',
+        'charge',
+        'salary',
+        'income_date',
+        'email',
+        'is_active',
+    ]
