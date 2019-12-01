@@ -111,6 +111,11 @@ class Project(models.Model):
         auto_now=False
     )
 
+    full_duration = models.IntegerField(
+        verbose_name='Duración',
+        default=0
+    )
+
     def __str__(self):
         return self.name
 
@@ -154,3 +159,39 @@ class UserHistory(models.Model):
     class Meta:
         verbose_name = 'Historia de usuario'
         verbose_name_plural = 'Historia de usuarios'
+
+
+class Activity(models.Model):
+    name = models.CharField(
+        max_length=200,
+        verbose_name='Nombre',
+    )
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        verbose_name='Proyecto',
+        help_text='Proyecto al que pertenece la historia de usuario'
+    )
+
+    user = models.ManyToManyField(
+        User,
+        verbose_name='Usuario',
+        help_text='Usuarios que realizaron la actividad'
+    )
+
+    description = models.TextField(
+        verbose_name='descripción',
+    )
+
+    duration = models.IntegerField(
+        verbose_name='Duración',
+        default=0
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Actividad'
+        verbose_name_plural = 'Actividades'

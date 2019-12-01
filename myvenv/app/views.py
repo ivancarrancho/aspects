@@ -2,6 +2,7 @@ from . import models
 from .forms import TeamForm
 from .forms import UserForm
 from .forms import UserHistoryForm
+from .forms import ActivityForm
 from .forms import ProjectForm
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -188,7 +189,6 @@ class UserUpdateView(FormView, DetailView):
         return super().form_valid(form)
 
 
-# ************************************
 class UserHistoryListView(ListView):
     model = models.UserHistory
     template = 'user_history_list.html'
@@ -244,5 +244,67 @@ class UserHistoryUpdateView(FormView, DetailView):
 
     def form_valid(self, form):
         form.update_user_history(pk=self.kwargs['pk'])
+
+        return super().form_valid(form)
+
+
+class ActivityListView(ListView):
+    model = models.Activity
+    template = 'activity_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return context
+
+    def get_queryset(self):
+        queryset = models.Activity.objects.all()
+
+        return queryset
+
+
+class ActivityDetailView(DetailView):
+    object = models.Activity
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(models.Activity, id=self.kwargs['pk'])
+
+
+class ActivityDeleteView(DeleteView):
+    def get_object(self, queryset=None):
+        obj = get_object_or_404(models.Activity, pk=self.kwargs['pk'])
+
+        obj.project.full_duration = obj.project.full_duration - obj.duration
+        obj.project.save()
+
+        if obj:
+            obj.delete()
+            return JsonResponse({'ok': True})
+
+        return JsonResponse({'ok': False})
+
+
+class ActivityCreateFormView(FormView):
+    template_name = 'activity_create.html'
+    form_class = ActivityForm
+    success_url = '/app/activity_list/'
+
+    def form_valid(self, form):
+        form.create_activity()
+
+        return super().form_valid(form)
+
+
+class ActivityUpdateView(FormView, DetailView):
+    object = models.Activity
+    template_name = 'activity_create.html'
+    form_class = ActivityForm
+    success_url = '/app/activity_list/'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(models.Activity, id=self.kwargs['pk'])
+
+    def form_valid(self, form):
+        form.update_activity(pk=self.kwargs['pk'])
 
         return super().form_valid(form)

@@ -128,4 +128,34 @@ urlpatterns = [
         views.UserHistoryUpdateView.as_view(),
         name='user_history_update',
     ),
+
+    path(
+        'activity_list/',
+        views.ActivityListView.as_view(template_name='activity_list.html'),
+        name='activity_list',
+    ),
+
+    path(
+        'activity_detail/<int:pk>/',
+        views.ActivityDetailView.as_view(template_name='activity_detail.html'),
+        name='activity_detail',
+    ),
+
+    path(
+        'activity_delete/<int:pk>/',
+        views.ActivityDeleteView.as_view(template_name='activity_delete.html'),
+        name='activity_delete',
+    ),
+
+    path(
+        'activity_create/',
+        views.ActivityCreateFormView.as_view(),
+        name='activity_create',
+    ),
+
+    path(
+        'activity_update/<int:pk>/',
+        views.ActivityUpdateView.as_view(),
+        name='activity_update',
+    )
 ]

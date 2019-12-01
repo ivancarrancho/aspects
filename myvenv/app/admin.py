@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Team
+from .models import Activity
 from .models import Project
-from .models import UserHistory
+from .models import Team
 from .models import User
+from .models import UserHistory
 
 
 @admin.register(Team)
@@ -61,4 +62,15 @@ class UserAdmin(admin.ModelAdmin):
         'income_date',
         'email',
         'is_active',
+    ]
+
+
+@admin.register(Activity)
+class ActivityAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'name',
+        'project',
+        'description',
+        'duration',
     ]

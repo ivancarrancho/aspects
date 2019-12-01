@@ -3,6 +3,7 @@ from .models import User
 from .models import UserHistory
 from .models import Team
 from .models import Project
+from .models import Activity
 
 
 class TeamForm(forms.Form):
@@ -253,3 +254,74 @@ class UserHistoryForm(forms.Form):
             'dependencies',
             'project',
         ]
+
+
+class ActivityForm(forms.Form):
+    name = forms.CharField(
+        label='Nombre de la actividad'
+    )
+    project = forms.ModelChoiceField(
+        label='Proyecto',
+        queryset=Project.objects.all(),
+    )
+    user = forms.ModelMultipleChoiceField(
+        label='Integrantes',
+        queryset=User.objects.all(),
+    )
+    description = forms.CharField(
+        label='Descripción de la actividad'
+    )
+    duration = forms.IntegerField(
+        label='Duración en horas'
+    )
+
+    def create_activity(self):
+        cleaned_data = super().clean()
+        name = cleaned_data.get('name')
+        project = cleaned_data.get('project')
+        user_list = cleaned_data.get('user')
+        description = cleaned_data.get('description')
+        duration = cleaned_data.get('duration')
+
+        activity_obj = Activity.objects.create(
+            name=name,
+            project=project,
+            description=description,
+            duration=duration,
+        )
+        for user in user_list:
+            activity_obj.user.add(user)
+
+        activity_obj.save()
+
+        project.full_duration = project.full_duration + duration
+        project.save()
+
+    def update_activity(self, pk):
+        cleaned_data = super().clean()
+        name = cleaned_data.get('name')
+        project = cleaned_data.get('project')
+        user_list = cleaned_data.get('user')
+        description = cleaned_data.get('description')
+        duration = cleaned_data.get('duration')
+
+        activity_queryset = Activity.objects.filter(pk=pk)
+        activity_obj = activity_queryset.first()
+
+        project.full_duration = project.full_duration - activity_obj.duration
+        project.save()
+
+        activity_queryset.update(
+            name=name,
+            project=project,
+            description=description,
+            duration=int(duration),
+        )
+
+        for user in user_list:
+            activity_obj.user.add(user)
+
+        activity_obj.save()
+
+        project.full_duration = project.full_duration + duration
+        project.save()

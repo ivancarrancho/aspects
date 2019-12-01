@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Proyecto</title>
+  <title>Actividad</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +26,12 @@
    {% include "menu.html" %}
 {% endblock %}
 
-
 <body id="page-top">
 <header class="masthead d-flex">
     <div class="container text-center my-auto">
-      <h1 class="mb-1">Crear / Editar</h1>
+      <h1 class="mb-1">Actividades</h1>
       <h3 class="mb-5">
-        <em>Puede crear un proyecto o editar el proyecto {{ object.name }}</em>
+        <em>Puede crear sus Actividad</em>
       </h3>
       <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Ver cómo</a>
     </div>
@@ -40,43 +39,39 @@
 </header>
 
   <!-- About -->
+  <section >
+    <br>
+    <br>
+    <br>
+    <div class="container text-center">
+      <h2 class="mx-auto mb-5">Crear Actividad</h2>
+      <a class="btn btn-primary btn-xl" href="/app/activity_create/">Nuevo</a>
+    </div>
+    <br>
+    <br>
+    <br>
+  </section>
+
   <section class="content-section bg-light" id="about">
     <div class="container">
       <div class="row">
         <div class="col-lg-10 mx-auto">
-          <h2>Detalle</h2>
-            <form method="post">{% csrf_token %}
-                <div class="form-group">
-                    {{ form.as_p }}
-                    <input type="submit" class="btn btn-primary " value="Enviar">
-                </div>
-            </form>
+          <h2>Listado de actividades!</h2>
+
+            {% for activity in object_list %}
+            <h3 class="activity-item__header-title">
+                <a href="/app/activity_detail/{{ activity.id }}/"> {{ activity.id }} - Nombre: {{ activity.name }}</a>
+                - <a href="/app/activity_delete/{{ activity.id }}/" class="btn btn-danger">Eliminar</a>
+                - <a href="/app/activity_update/{{ activity.id }}/" class="btn btn-primary">Editar</a>
+            </h3>
+                <h5>Usuarios: {% for obj in activity.user.all %} {{ obj }} - {% endfor %}</h5>
+            {% empty %}
+                <p class="lead mb-5">No hay resultados</p>
+            {% endfor %}
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Callout -->
-  <!-- <section class="callout">
-    <div class="container text-center">
-      <h2 class="mx-auto mb-5">Welcome to
-        <em>your</em>
-        next website!</h2>
-      <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/template-overviews/stylish-portfolio/">Download Now!</a>
-    </div>
-  </section> -->
-
-  <!-- Portfolio -->
-
-  <!-- Call to Action -->
-  <!-- <section class="content-section bg-primary text-white">
-    <div class="container text-center">
-      <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-      <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-      <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
-    </div>
-  </section> -->
-
   <!-- Footer -->
   <footer class="footer text-center">
     <div class="container">
@@ -107,7 +102,6 @@
   </a>
 
   <!-- Bootstrap core JavaScript -->
-
   <script src="/static/vendor/jquery/jquery.min.js"></script>
   <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -116,6 +110,7 @@
 
   <!-- Custom scripts for this template -->
   <script src="/static/js/stylish-portfolio.min.js"></script>
+
 </body>
 
 </html>
