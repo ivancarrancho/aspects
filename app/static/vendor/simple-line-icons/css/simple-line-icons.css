@@ -776,3 +776,7 @@
 .icon-social-steam:before {
   content: "\e620";
 }
+
+.center-activities {
+    margin: 0 auto;
+}
